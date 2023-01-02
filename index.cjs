@@ -21,7 +21,7 @@ var fname;
 // Set up multer to handle file uploads
 const storage = multer.diskStorage({
        destination: (req, file, cb) => {
-              cb(null, './uploads');
+              cb(null, './');
        },
        filename: (req, file, cb) => {
               fname = `${file.fieldname}-${Date.now()}.pdf`;
@@ -62,7 +62,7 @@ app.post('/', upload.single('file'), (req, res,next) => {
               // console.log();
               // Save the output PDF file
               fs.writeFileSync(outputPath, await pdfDoc.save());
-              fs.unlink('./uploads/' + fname, (err) => {
+              fs.unlink('./' + fname, (err) => {
                      if (err) {
                        console.error(err);
                      } else {
@@ -79,7 +79,7 @@ app.post('/', upload.single('file'), (req, res,next) => {
        if(req.body.Ecommerce==1)
        {
 
-       cropPDF('./uploads/' + fname,'outputfiledownload.pdf', 170, 467, 255, 353)
+       cropPDF('./' + fname,'outputfiledownload.pdf', 170, 467, 255, 353)
               .then(() => {
                      console.log("PDF is cropped");
                      // PDF has been cropped
@@ -93,7 +93,7 @@ app.post('/', upload.single('file'), (req, res,next) => {
        else if(req.body.Ecommerce==2)
        {
              
-              cropPDF('./uploads/' + fname,'outputfiledownload.pdf',  0, 490, 600, 600)
+              cropPDF('./' + fname,'outputfiledownload.pdf',  0, 490, 600, 600)
               .then(() => {
                      console.log("Meesho is cropped");
                      // PDF has been cropped
