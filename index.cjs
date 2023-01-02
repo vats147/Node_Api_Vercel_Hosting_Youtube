@@ -30,12 +30,12 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-app.use("/",(req,res)=>{
+app.use("/upload",(req,res)=>{
        res.json({Message: "Hello From My World "});
 })
 
 // Set up a route to handle file uploads
-app.post('/upload', upload.single('file'), (req, res,next) => {
+app.post('/', upload.single('file'), (req, res,next) => {
        // Read the input PDF file
        const file = req.file;
        if (!file) {
