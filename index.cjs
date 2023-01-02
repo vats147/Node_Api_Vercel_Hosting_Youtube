@@ -62,7 +62,7 @@ app.post('/', upload.single('file'), (req, res,next) => {
               // console.log();
               // Save the output PDF file
               fs.writeFileSync(outputPath, await pdfDoc.save());
-              fs.unlink('./' + fname, (err) => {
+              fs.unlink( fname, (err) => {
                      if (err) {
                        console.error(err);
                      } else {
