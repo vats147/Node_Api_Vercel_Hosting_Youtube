@@ -36,6 +36,8 @@ app.use("/upload",(req,res)=>{
 
 // Set up a route to handle file uploads
 app.post('/', upload.single('file'), (req, res,next) => {
+  
+  console.log("Your IP Addresss is: " + req.socket.localAddress);
        // Read the input PDF file
        const file = req.file;
        if (!file) {
