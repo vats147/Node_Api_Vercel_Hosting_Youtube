@@ -69,9 +69,10 @@ app.post('/', upload.single('file'), (req, res,next) => {
               fs.writeFileSync(outputPath, await pdfDoc.save());
               fs.unlink( fname, (err) => {
                      if (err) {
-                       console.error(err);
                        console.log("Date " + date.toLocaleDateString());
                         console.log("Date Time" + date.toLocaleTimeString());
+                       console.error(err);
+                       
                         
                      } else {
                        console.log('File deleted successfully');
