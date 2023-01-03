@@ -6,9 +6,10 @@ const { PDFDocument } = require('pdf-lib');
 const http = require('http');
 // const app = express();
 const cors = require('cors');
+var date = new Date();
 
 const app = express();
-
+var check=0;
 
 app.use(cors({
   origin: '*',
@@ -24,7 +25,9 @@ const storage = multer.diskStorage({
               cb(null, './');
        },
        filename: (req, file, cb) => {
-              fname = `${file.fieldname}-${Date.now()}.pdf`;
+         check++;
+              fname = `${file.fieldname}-${Date.now()}.pdf`+check;
+              console.log("Filename : "+fname);
               cb(null, fname);
        },
 });
@@ -67,6 +70,9 @@ app.post('/', upload.single('file'), (req, res,next) => {
               fs.unlink( fname, (err) => {
                      if (err) {
                        console.error(err);
+                       console.log("Date " + date.toLocaleDateString());
+                        console.log("Date Time" + date.toLocaleTimeString());
+                        
                      } else {
                        console.log('File deleted successfully');
                      }
