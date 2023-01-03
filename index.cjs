@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
        },
        filename: (req, file, cb) => {
          check++;
-              fname = `${file.fieldname}{check}-${Date.now()}.pdf`;
+              fname = `${file.fieldname} ${check}-${Date.now()}.pdf`;
               console.log("Filename : "+fname);
               cb(null, fname);
        },
