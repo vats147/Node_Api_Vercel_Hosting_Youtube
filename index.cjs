@@ -39,8 +39,11 @@ app.use("/upload",(req,res)=>{
 
 // Set up a route to handle file uploads
 app.post('/', upload.single('file'), (req, res,next) => {
-  
-  console.log("Your IP Addresss is: " + req.socket.localAddress);
+   console.log("=================================================");
+   console.log("API Request Date " + date.toLocaleDateString());
+   console.log("API Request  Time" + date.toLocaleTimeString());
+   console.log("Your IP Addresss is: " + req.socket.localAddress);
+   console.log("=================================================");
        // Read the input PDF file
        const file = req.file;
        if (!file) {
@@ -69,8 +72,7 @@ app.post('/', upload.single('file'), (req, res,next) => {
               fs.writeFileSync(outputPath, await pdfDoc.save());
               fs.unlink( fname, (err) => {
                      if (err) {
-                       console.log("Date " + date.toLocaleDateString());
-                        console.log("Date Time" + date.toLocaleTimeString());
+                      
                        console.error(err);
                        
                         
