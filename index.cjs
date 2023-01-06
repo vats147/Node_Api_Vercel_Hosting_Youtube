@@ -45,7 +45,8 @@ app.post('/', upload.single('file'), (req, res,next) => {
 
    console.log(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate());
    console.log("===========================");
-   console.log(date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+    
+   console.log(Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
   
    console.log("===========================");
    console.log("Your IP Addresss is: " + req.socket.localAddress);
