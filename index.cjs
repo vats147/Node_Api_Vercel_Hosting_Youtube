@@ -40,8 +40,10 @@ app.use("/upload",(req,res)=>{
 // Set up a route to handle file uploads
 app.post('/', upload.single('file'), (req, res,next) => {
    console.log("=================================================");
-   console.log("API Request Date " + date.toLocaleDateString());
-   console.log("API Request  Time" + date.toLocaleTimeString());
+   console.log("API Last Build Date " + date.toLocaleDateString());
+   console.log("API Last Build  Time" + date.toLocaleTimeString());
+
+   console.log(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate());
    console.log("Your IP Addresss is: " + req.socket.localAddress);
    console.log("=================================================");
        // Read the input PDF file
