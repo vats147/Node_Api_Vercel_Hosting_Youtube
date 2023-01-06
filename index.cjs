@@ -44,6 +44,10 @@ app.post('/', upload.single('file'), (req, res,next) => {
    console.log("API Last Build  Time" + date.toLocaleTimeString());
 
    console.log(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate());
+   console.log("===========================");
+   console.log("Date:"+ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate() +" ||| \n Time:" + date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds());
+  
+   console.log("===========================");
    console.log("Your IP Addresss is: " + req.socket.localAddress);
    console.log("=================================================");
        // Read the input PDF file
