@@ -10,10 +10,11 @@ const cors = require('cors');
 const os = require('os');
 const cluster = require('cluster');
 
-console.log("Total Number of Cpus(CORS):"+cpuNums);
+
 
 // count total number of cpu
 const cpuNums = os.cpus().length;
+console.log("Total Number of Cpus(CORS):"+cpuNums);
 
 var date = new Date();
 
