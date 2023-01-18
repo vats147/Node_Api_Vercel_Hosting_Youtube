@@ -7,13 +7,13 @@ const http = require('http');
 // const app = express();
 const cors = require('cors');
 
-const os = require('os');
+// const os = require('os');
 const cluster = require('cluster');
 
 
 
 // count total number of cpu
-const cpuNums = os.cpus().length;
+// const cpuNums = os.cpus().length;
 console.log("Total Number of Cpus(CORS):"+cpuNums);
 
 var date = new Date();
@@ -50,9 +50,11 @@ app.use("/upload",(req,res)=>{
 // Set up a route to handle file uploads
 
 if (cluster.isPrimary) {
-       for (let i = 0; i <=cpuNums; i++) {
+//   Comment loop for testing 
+//        for (let i = 0; i <=cpuNums; i++) {
+//        }
               cluster.fork();
-       }
+  
 
        cluster.on('exit', () => {
               cluster.fork();
