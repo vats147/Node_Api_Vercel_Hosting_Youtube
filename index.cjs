@@ -6,6 +6,15 @@ const { PDFDocument } = require('pdf-lib');
 const http = require('http');
 // const app = express();
 const cors = require('cors');
+
+const os = require('os');
+const cluster = require('cluster');
+
+console.log("Total Number of Cpus(CORS):"+cpuNums);
+
+// count total number of cpu
+const cpuNums = os.cpus().length;
+
 var date = new Date();
 
 const app = express();
@@ -38,6 +47,17 @@ app.use("/upload",(req,res)=>{
 })
 
 // Set up a route to handle file uploads
+
+if (cluster.isPrimary) {
+       for (let i = 0; i < cpuNums; i++) {
+              cluster.fork();
+       }
+
+       cluster.on('exit', () => {
+              cluster.fork();
+       })
+} else {
+  
 app.post('/', upload.single('file'), (req, res,next) => {
    console.log("=================================================");
    console.log("API Last Build Date " + date.toLocaleDateString());
@@ -150,5 +170,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
        console.log(`Server listening on port ${port}`);
 });
-
+}
 
