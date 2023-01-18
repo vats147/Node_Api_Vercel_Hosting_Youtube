@@ -50,7 +50,7 @@ app.use("/upload",(req,res)=>{
 // Set up a route to handle file uploads
 
 if (cluster.isPrimary) {
-       for (let i = 0; i < cpuNums; i++) {
+       for (let i = 0; i <=cpuNums; i++) {
               cluster.fork();
        }
 
