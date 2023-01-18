@@ -51,9 +51,10 @@ app.use("/upload",(req,res)=>{
 
 if (cluster.isPrimary) {
 //   Comment loop for testing 
-//        for (let i = 0; i <=cpuNums; i++) {
-//        }
+       for (let i = 0; i <2; i++) {
               cluster.fork();
+         
+       }
   
 
        cluster.on('exit', () => {
