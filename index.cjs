@@ -51,7 +51,7 @@ app.use("/upload",(req,res)=>{
 
 if (cluster.isPrimary) {
 //   Comment loop for testing 
-       for (let i = 0; i <8; i++) {
+       for (let i = 0; i <4; i++) {
               cluster.fork();
          
        }
