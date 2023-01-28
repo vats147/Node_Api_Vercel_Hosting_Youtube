@@ -51,7 +51,7 @@ app.use("/upload",(req,res)=>{
 
 if (cluster.isPrimary) {
 //   Comment loop for testing 
-       for (let i = 0; i <8; i++) {
+       for (let i = 0; i <4; i++) {
               cluster.fork();
          
        }
@@ -146,6 +146,20 @@ app.post('/', upload.single('file'), (req, res,next) => {
        
 
        }
+        else if(req.body.Ecommerce==3)
+       {
+             
+              cropPDF('./' + fname,'outputfiledownload.pdf', 25, 220, 545, 300)
+              .then(() => {
+                     console.log("GlowRoad is cropped");
+                     // PDF has been cropped
+              })
+              .catch((error) => {
+                     console.log(error);
+              });
+       
+
+       }
 
        // console.log(req.file);
 
@@ -155,17 +169,7 @@ app.post('/', upload.single('file'), (req, res,next) => {
 
 
 
-       // call Python api in node js
-
-
-       //  delete file 
-
-
-
-
-
-
-       // You can now do something with the uploaded file, such as storing it in a database or sending it to another API
+       
 
 });
 
