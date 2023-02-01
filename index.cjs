@@ -56,7 +56,7 @@ async function mergePdfs(pdfs) {
        for (const pdf of pdfs) {
               await merger.add(pdf);
        }
-       mname = 'public/merged-' + Date.now() + '.pdf';
+       mname = './merged-' + Date.now() + '.pdf';
        await merger.save(mname);
 }
 
