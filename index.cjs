@@ -9,6 +9,7 @@ const cors = require('cors');
 
 const os = require('os');
 const cluster = require('cluster');
+const { default: e } = require('express');
 
 
 
@@ -117,8 +118,79 @@ app.post('/', upload.single('file'), (req, res,next) => {
               // fs.unlink();
 
        }
+
+       //function overloading for amazon
+       async function cropPDF(inputPath, outputPath) {
+             
+              // Read the input PDF file
+              let pdfDoc = await PDFDocument.load(fs.readFileSync(inputPath));
+
+              //   Loop through all pages in the PDF
+              for (let i = 0; i < pdfDoc.getPages().length; i++) {
+
+
+                     // Get the page that you want to crop
+                     let page = pdfDoc.getPage(i);
+
+                     //remove the odd pages(1,3,5,7) 
+                     //count start from the 0
+                     if(i%2==1)
+                     {
+                           console.log(i);
+                            pdfDoc.removePage(i);
+                            continue
+                     }
+                    
+              }
+             
+              // Save the output PDF file
+              fs.writeFileSync(outputPath, await pdfDoc.save());
+              fs.unlink( fname, (err) => {
+                     if (err) {
+                      
+                       console.error(err);
+                       
+                        
+                     } else {
+                       console.log('File deleted successfully');
+                     }
+                   });
+
+
+                   res.download(outputPath);
+              // fs.unlink();
+
+       }
+
+
        console.log(req.body.Ecommerce);
-       if(req.body.Ecommerce==1)
+
+       /*
+       Ecommerce=1 for Amazon
+       Ecommerce=2 for Flipkart    
+       Ecommerce=3 for Meesho
+       Ecommerce=4 for GlowRoad
+
+       */
+
+       //Amazon Crop
+        if(req.body.Ecommerce==1)
+       {
+             
+              cropPDF('./' + fname,'outputfiledownload.pdf')
+              .then(() => {
+                     console.log("Amazon is cropped");
+                     // PDF has been cropped
+              })
+              .catch((error) => {
+                     console.log(error);
+              });
+       
+
+       }
+
+       //Flipkart Crop
+       else if(req.body.Ecommerce==2)
        {
 
        cropPDF('./' + fname,'outputfiledownload.pdf', 170, 467, 255, 353)
@@ -132,7 +204,9 @@ app.post('/', upload.single('file'), (req, res,next) => {
        
 
        }
-       else if(req.body.Ecommerce==2)
+
+       //Meesho Crop
+       else if(req.body.Ecommerce==3)
        {
              
               cropPDF('./' + fname,'outputfiledownload.pdf',  0, 490, 600, 600)
@@ -146,7 +220,9 @@ app.post('/', upload.single('file'), (req, res,next) => {
        
 
        }
-        else if(req.body.Ecommerce==3)
+       
+       //GlowRoad Crop
+        else if(req.body.Ecommerce==4)
        {
              
               cropPDF('./' + fname,'outputfiledownload.pdf', 25, 220, 545, 300)
@@ -160,8 +236,9 @@ app.post('/', upload.single('file'), (req, res,next) => {
        
 
        }
+       
 
-       // console.log(req.file);
+       
 
 
        console.log("File downloaded");
