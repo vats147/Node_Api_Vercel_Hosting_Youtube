@@ -120,47 +120,47 @@ app.post('/', upload.single('file'), (req, res,next) => {
        }
 
        //function overloading for amazon
-       async function cropPDF(inputPath, outputPath) {
+//        async function cropPDF(inputPath, outputPath) {
              
-              // Read the input PDF file
-              let pdfDoc = await PDFDocument.load(fs.readFileSync(inputPath));
+//               // Read the input PDF file
+//               let pdfDoc = await PDFDocument.load(fs.readFileSync(inputPath));
 
-              //   Loop through all pages in the PDF
-              for (let i = 0; i < pdfDoc.getPages().length; i++) {
+//               //   Loop through all pages in the PDF
+//               for (let i = 0; i < pdfDoc.getPages().length; i++) {
 
 
-                     // Get the page that you want to crop
-                     let page = pdfDoc.getPage(i);
+//                      // Get the page that you want to crop
+//                      let page = pdfDoc.getPage(i);
 
-                     //remove the odd pages(1,3,5,7) 
-                     //count start from the 0
-                     if(i%2==1)
-                     {
-                           console.log(i);
-                            pdfDoc.removePage(i);
-                            continue
-                     }
+//                      //remove the odd pages(1,3,5,7) 
+//                      //count start from the 0
+//                      if(i%2==1)
+//                      {
+//                            console.log(i);
+//                             pdfDoc.removePage(i);
+//                             continue
+//                      }
                     
-              }
+//               }
              
-              // Save the output PDF file
-              fs.writeFileSync(outputPath, await pdfDoc.save());
-              fs.unlink( fname, (err) => {
-                     if (err) {
+//               // Save the output PDF file
+//               fs.writeFileSync(outputPath, await pdfDoc.save());
+//               fs.unlink( fname, (err) => {
+//                      if (err) {
                       
-                       console.error(err);
+//                        console.error(err);
                        
                         
-                     } else {
-                       console.log('File deleted successfully');
-                     }
-                   });
+//                      } else {
+//                        console.log('File deleted successfully');
+//                      }
+//                    });
 
 
-                   res.download(outputPath);
-              // fs.unlink();
+//                    res.download(outputPath);
+//               // fs.unlink();
 
-       }
+//        }
 
 
        console.log(req.body.Ecommerce);
