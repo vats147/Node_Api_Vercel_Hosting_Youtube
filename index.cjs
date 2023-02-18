@@ -174,23 +174,23 @@ app.post('/', upload.single('file'), (req, res,next) => {
        */
 
        //Amazon Crop
-        if(req.body.Ecommerce==1)
-       {
+       //  if(req.body.Ecommerce==1)
+       // {
              
-              cropPDF('./' + fname,'outputfiledownload.pdf')
-              .then(() => {
-                     console.log("Amazon is cropped");
-                     // PDF has been cropped
-              })
-              .catch((error) => {
-                     console.log(error);
-              });
+       //        cropPDF('./' + fname,'outputfiledownload.pdf')
+       //        .then(() => {
+       //               console.log("Amazon is cropped");
+       //               // PDF has been cropped
+       //        })
+       //        .catch((error) => {
+       //               console.log(error);
+       //        });
        
 
-       }
+       // }
 
        //Flipkart Crop
-       else if(req.body.Ecommerce==2)
+        if(req.body.Ecommerce==2)
        {
 
        cropPDF('./' + fname,'outputfiledownload.pdf', 170, 467, 255, 353)
