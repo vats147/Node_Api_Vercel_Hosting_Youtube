@@ -121,7 +121,7 @@ app.post('/', upload.single('file'), (req, res,next) => {
 
        //function overloading for amazon
        async function cropPDF(inputPath, outputPath) {
-             
+             try{
               // Read the input PDF file
               let pdfDoc = await PDFDocument.load(fs.readFileSync(inputPath));
 
@@ -160,6 +160,11 @@ app.post('/', upload.single('file'), (req, res,next) => {
 
                    res.download(outputPath);
               // fs.unlink();
+             }
+         catch(er)
+         {
+           console.log(er);
+         }
 
        }
 
