@@ -1,3 +1,11 @@
+//--> Done all crop features
+//     Amazon
+//     Flipkart
+//     Meesho
+//     GlowRoad
+//     ...
+
+
 //import my library
 const express = require('express');
 const multer = require('multer');
@@ -119,54 +127,7 @@ app.post('/', upload.single('file'), (req, res,next) => {
 
        }
 
-       //function overloading for amazon
-       async function cropPDF(inputPath, outputPath) {
-             try{
-              // Read the input PDF file
-              let pdfDoc = await PDFDocument.load(fs.readFileSync(inputPath));
-
-              //   Loop through all pages in the PDF
-              for (let i = 0; i < pdfDoc.getPages().length; i++) {
-
-
-                     // Get the page that you want to crop
-                     let page = pdfDoc.getPage(i);
-
-                     //remove the odd pages(1,3,5,7) 
-                     //count start from the 0
-                     if(i%2==1)
-                     {
-                            //apply reverse Engenering
-                            pdfDoc.removePage(pdfDoc.getPages().length-i);
-                            
-                            continue
-                     }
-                    
-              }
-             
-              // Save the output PDF file
-              fs.writeFileSync(outputPath, await pdfDoc.save());
-              fs.unlink( fname, (err) => {
-                     if (err) {
-                      
-                       console.error(err);
-                       
-                        
-                     } else {
-                       console.log('File deleted successfully');
-                     }
-                   });
-
-
-                   res.download(outputPath);
-              // fs.unlink();
-             }
-         catch(er)
-         {
-           console.log(er);
-         }
-
-       }
+      
 
 
        console.log(req.body.Ecommerce);
@@ -182,21 +143,72 @@ app.post('/', upload.single('file'), (req, res,next) => {
        //Amazon Crop
         if(req.body.Ecommerce==1)
        {
+
+       //         //function overloading for amazon
+       // async function cropPDF(inputPath, outputPath) {
+       //        try{
+       //         // Read the input PDF file
+       //         let pdfDoc = await PDFDocument.load(fs.readFileSync(inputPath));
+       //         console.log("Length "+pdfDoc.getPages().length);
+       //         let temp;
+       //         //   Loop through all pages in the PDF
+       //         for (let i = 0; i < pdfDoc.getPages().length; i++) {
+                      
+       //                // Get the page that you want to crop
+       //                let page = pdfDoc.getPage(i);
+                      
+       //                //remove the odd pages(1,3,5,7) 
+       //                //count start from the 0
+       //                console.log("i "+i);
+       //                if(i%2==1)
+       //                {
+       //                       console.log(i);
+       //                      // let temp=page.removePage(i);
+       //                      console.log("Total Pages ==" + pdfDoc.getPages().length);
+       //                       pdfDoc.removePage(pdfDoc.getPages().length-i);
+       //                       continue
+       //                }
+                     
+       //         }
+              
+       //         // Save the output PDF file
+       //         fs.writeFileSync(outputPath, await pdfDoc.save());
+       //         fs.unlink( fname, (err) => {
+       //                if (err) {
+                       
+       //                  console.error(err);
+                        
+                         
+       //                } else {
+       //                  console.log('File deleted successfully');
+       //                }
+       //              });
+ 
+ 
+       //              res.download(outputPath);
+       //         // fs.unlink();
+       //        }
+       //        catch(er)
+       //        {
+       //         console.log(er);
+       //        }
+ 
+       //  }
              
-              cropPDF('./' + fname,'outputfiledownload.pdf')
-              .then(() => {
-                     console.log("Amazon is cropped");
-                     // PDF has been cropped
-              })
-              .catch((error) => {
-                     console.log(error);
-              });
+       //        cropPDF('./' + fname,'outputfiledownload.pdf')
+       //        .then(() => {
+       //               console.log("Amazon is cropped");
+       //               // PDF has been cropped
+       //        })
+       //        .catch((error) => {
+       //               console.log(error);
+       //        });
        
 
        }
 
        //Flipkart Crop
-       else if(req.body.Ecommerce==2)
+        if(req.body.Ecommerce==2)
        {
 
        cropPDF('./' + fname,'outputfiledownload.pdf', 170, 467, 255, 353)
